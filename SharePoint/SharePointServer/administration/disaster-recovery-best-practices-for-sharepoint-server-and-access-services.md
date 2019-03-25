@@ -91,12 +91,13 @@ Write the ServerRefID to the screen for use when registering the secondary farm 
 
 ```
 $serverGroupName = 'DEFAULT'
+$PrimaryServerRefID = "<PrimaryServerRefID>"
 $DatabaseServerName = "<Secondary Access Database Server>"
 $ASapp = Get-SPAccessServicesApplication
 $app = $Null
 if ($ASapp.length -ne $Null) { $app = $ASapp[0] } else { $app = $ASapp }
 $context = [Microsoft.SharePoint.SPServiceContext]::GetContext($app.ServiceApplicationProxyGroup, [Microsoft.SharePoint.SPSiteSubscriptionIdentifier]::Default)
-$newdbserver = New-SPAccessServicesDatabaseServer -ServiceContext $context -DatabaseServerName "SecondaryDatabaseServerName" -DatabaseServerGroup $serverGroupName -ServerReferenceId "<PrimaryServerRefID>" -AvailableForCreate $true
+$newdbserver = New-SPAccessServicesDatabaseServer -ServiceContext $context -DatabaseServerName $DatabaseServerName -DatabaseServerGroup $serverGroupName -ServerReferenceId $PrimaryServerRefID -AvailableForCreate $true
 #<PrimaryServerRefID> in the above script represents the same ServerRefID from the primary farm registration
 ```
 
